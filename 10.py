@@ -3,9 +3,9 @@ def knapsack(n: int, w: int, weight: list[int], cost: list[int]):
     x_o = [[0] * (w + 1) for _ in range(n + 1)]
     for type_number in range(1, n + 1):
         print(f"Шаг №{type_number}:")
-        print("$$")
-        print(r"\large \begin{aligned}")
         for C in range(w + 1):
+            print("$$")
+            print(r"\large \begin{aligned}")
             print(fr"& W_{type_number}({C})=\max_" + r"{x_i \in \overline{0, \left[\frac{" + str(w) + "}{" + str(weight[type_number]) + r"}\right]}}" + r" \{", end='')
             print(r"x_i \cdot cost_i + W_{" + f"{type_number}-1" + "}(" + str(w) + r" - x_i \cdot weight_i)" + r"\}= \\", end='')
             dp[type_number][C] = dp[type_number - 1][C]  # when subject of type_number type is not taken
@@ -19,10 +19,9 @@ def knapsack(n: int, w: int, weight: list[int], cost: list[int]):
                     x_o[type_number][C] = x
                     dp[type_number][C] = cur
             print(r"\}=", rf"{dp[type_number][C]}, \quad x_{type_number} = {x_o[type_number][C]} \\")
-
-        print(r"\end{aligned}")
-        print("$$")
-        print_markdown_matrix([[i for i in range(w + 1)]] + [dp[type_number]] + [x_o[type_number]])
+            print(r"\end{aligned}")
+            print("$$")
+        # print_markdown_matrix([[i for i in range(w + 1)]] + [dp[type_number]] + [x_o[type_number]])
     print(f"###### Ответ")
     print(f"Максимальная стоимость: {dp[n][w]}")
     w_ = w
@@ -55,7 +54,7 @@ def get_problem_from_file(file_name):
     return n, w, weight, cost
 
 def main():
-    n, w, weight, cost = get_problem_from_file("Work10/input1.txt")
+    n, w, weight, cost = get_problem_from_file("Work10/input2.txt")
     print(f"Количество типов предметов {n}, грузоподъемность: {w}")
     print("Веса:")
     print_markdown_matrix([weight[1:]])
